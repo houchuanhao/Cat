@@ -9,8 +9,26 @@
   <body>
   <%= render 'layouts/header' %>
   <div class="container">
+
+    <!--- 易懂的写法
+    <%# flash.each do |message_type, message| %>
+      <div class="alert alert-<%#= message_type %>"><%#= message %></div>
+    <%# end %>
+    -->
+<!--下面是优雅的写法
+    调用了content_tag这个函数，返回结果为一个视图
+    第一个参数:div决定返回一个div
+    第二个参数为div的内容，相当于<div>message<div>
+    第三个参数为div的class
+
+--->
+    <% flash.each do |message_type, message| %>
+      <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
+    <% end %>
+
     <%= yield %>
     <%= render 'layouts/footer' %>
+    <%= debug(params) if Rails.env.development? %>
   </div>
   </body>
 </html>

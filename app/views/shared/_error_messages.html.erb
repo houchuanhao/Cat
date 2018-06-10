@@ -1,0 +1,18 @@
+<% if @user.errors.any? %>
+  <div id="error_explanation">
+    <div class="alert alert-danger">
+      <!---
+      pluralize 函数第一个参数为整形，第二个为字符串，返回结果为整形与字符串的拼接,
+      牛逼的是。。还特么识别单复数
+      pluralize 1,"error" 返回结果为"1 error"
+      pluralize 2,"error" 返回结果为"2 errors"
+      --->
+      The form contains <%= pluralize(@user.errors.count, "error") %>.
+    </div>
+    <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

@@ -1,0 +1,40 @@
+<% provide(:title,"Sign up") %>
+<h1> Sign up</h1>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%# form_for @user do |f|%>
+    <!--
+    form_for 有两个参数，第一个是@user,第二个是一个块,do |a| ... end代表着一个块
+    其返回结果为一个form视图，
+    同时默认的action为'/users',方式为post  ====>post /users对应的控制器为users#create
+    默认的action是由第一个参数@user决定的，rails知道@user的类型为User
+    如果将第一个参数改成Micropost.new （并且去掉f.label ,f.text_field这些内容，因为Micropost类中没有这些属性）
+    在浏览器中按F12看到的action就变成了/microposts
+    除此之外，还可以指定URL..
+    -->
+    <!---在view-->
+    <%= form_for @user,URL: signup_path do |f|%>
+      <%# 因为在路由中添加了post '/signup',to: users#create
+          所以可以直接使用signup_path或者signup_url来代替'/signup'%>
+      <%= render 'shared/error_messages' %>
+      <!--
+      f.label是一个函数，返回label类型的视图，第一个参数(:name)是一个符号类型变量，
+      表示此label指向name属性对应的text_field
+      第二个参数可省略，代表此label的文字，默认为字段名(Name)
+      -->
+      <%= f.label :name,"Name--f.label的第二个参数" %>
+      <%= f.text_field :name %>
+
+      <%= f.label :email %>
+      <%= f.email_field :email %>
+
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+
+      <%= f.label :password_confirmation, "Confirmation" %>
+      <%= f.password_field :password_confirmation %>
+
+      <%= f.submit "Create my account", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
