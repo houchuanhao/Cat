@@ -156,3 +156,17 @@ input {
     color: $state-danger-text;
   }
 }
+
+
+//复选框
+.checkbox {
+  input{
+    width: 60px;
+  }
+  margin-top: -10px;
+  margin-bottom: 10px;
+  span {
+    margin-left: 20px;
+    font-weight: normal;
+  }
+}

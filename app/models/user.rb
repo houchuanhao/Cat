@@ -49,6 +49,7 @@ class User < ApplicationRecord
   # 这里的remember_token是方法里的参数，是的局部变量，而不是类中的属性
   # 用于检测自身的remember_digest属性与参数中的remember_token是否匹配
   def authenticated?(remember_token)
+    return false if remember_digest.nil?
     BCrypt::Password.new(remember_digest).is_password?(remember_token)
   end
 end
