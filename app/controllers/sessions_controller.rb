@@ -7,6 +7,8 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
 # 登入用户,然后重定向到用户的资料页面
       log_in user
+      #记住用户
+      remember user
       redirect_to user
       # 相当于redirect_to user_url(user)
       # user_url(user)  "http://0.0.0.0:3000/users/5"

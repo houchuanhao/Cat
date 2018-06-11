@@ -10,6 +10,7 @@ class UsersController < ApplicationController
       #debugger
       log_in @user
       flash[:success]="Welcome to the Sample App!"
+      remember @user
       redirect_to @user
       #redirect_to是重定向的意思
       #redirect_to @user等价于 redirect_to user_url(@user)
