@@ -42,7 +42,9 @@ class User < ApplicationRecord
     update_attribute(:remember_digest, User.digest(remember_token))
   end
 
-
+  def forget
+    update_attribute(:remember_digest, nil)
+  end
   # 如果指定的令牌和摘要匹配,返回 true
   # 这里的remember_token是方法里的参数，是的局部变量，而不是类中的属性
   # 用于检测自身的remember_digest属性与参数中的remember_token是否匹配

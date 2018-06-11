@@ -32,10 +32,18 @@ module SessionsHelper
   def logged_in?
     !current_user.nil?
   end
-
+  #忘记用户
+  def forget(user)
+    if(!user.nil?)
+      user.forget
+    end
+    cookies.delete(:user_id)
+    cookies.delete(:remember_token)
+  end
   # 退出当前用户
   def log_out
     session.delete(:user_id)
+    forget(@current_user)
     @current_user = nil
   end
 
