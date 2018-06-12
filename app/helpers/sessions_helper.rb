@@ -21,6 +21,7 @@ module SessionsHelper
       @current_user ||= User.find_by(id: user_id)
       #临时会话session中没有user_id，从持久会话cookie中取
     elsif (user_id = cookies.signed[:user_id])
+      #raise  # 测试仍能通过,所以没有覆盖这个分支
       user = User.find_by(id: user_id)
       if user && user.authenticated?(cookies[:remember_token])
         log_in user
