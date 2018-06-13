@@ -11,12 +11,20 @@ will_paginate 要求调用 paginate 方法才能分页
 
 
 <ul class="users">
-  <% @users.each do |user| %>
-    <li>
-      <%= gravatar_for user, size: 50 %>
-      <%= link_to user.name, user %>
-    </li>
-  <% end %>
+  <%= render @users %>
+<!--
+Rails 会把 @users 当作一个 User 对象列表,传给 render 方法后,Rails 会自动遍历这个列表,然后使用局部
+视图 _user.html.erb 渲染每个对象(Rails 从类名中推断出局部视图的名称)
+
+
+
+下面的形式与上面完全等价，只是上面的比较有Ｂ格
+--->
+  <%# @users.each do |user| %>
+
+  <%#= render 'user' %>
+  <%# end %>
+
 </ul>
 
 

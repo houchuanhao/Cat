@@ -5,8 +5,9 @@ class UsersController < ApplicationController
   # delete
   # 在执行edit,uodate之前，都要确保用户已登录，
   # 如果没有登录，跳转到登录界面
-  before_action :logged_in_user,only: [:edit,:update,:index]
+  before_action :logged_in_user,only: [:edit,:update,:index,:destroy]
   before_action :correct_user,only: [:edit,:update]
+  before_action :admin_user, only: :destroy
   def new
     #debugger
     @user=User.new
@@ -47,6 +48,8 @@ class UsersController < ApplicationController
     @user=User.find(params[:id])
     # debugger #Ctrl+D键退出
   end
+
+
   #接收get请求
   def edit
     @user=User.find_by(id: params[:id])
@@ -63,6 +66,12 @@ class UsersController < ApplicationController
       render 'edit'
     end
   end
+
+  def destroy
+    User.find(params[:id]).destroy
+    flash[:success] = "User deleted"
+    redirect_to users_url
+    end
   private def user_params
     #permit许可证
     # 其实相当于params[:user],只不过rails中为了安全，防止传过来其他参数，于是添加了许可证，只要permit里的这几个键对应的值
@@ -94,5 +103,14 @@ class UsersController < ApplicationController
         redirect_to root_url
       end
     end
+
+    # 确保是管理员
+    def admin_user
+      redirect_to(root_url) unless current_user.admin?
+    end
+
+
+
   end
+
 end
