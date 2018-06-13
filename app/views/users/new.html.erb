@@ -1,7 +1,33 @@
 <% provide(:title,"Sign up") %>
+<%provide(:button_text,"创建") %>
 <h1> Sign up</h1>
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
+    <%= render "form" %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <% for i in 0..9 do %>
+      <br>
+      <% end %>
+
+　　　下面忽略
+
+    <!----下面是最初的版本，因为记录了一些学习笔记，所以暂时先不删除>
+
     <%# form_for @user do |f|%>
     <!--
     form_for 有两个参数，第一个是@user,第二个是一个块,do |a| ... end代表着一个块
@@ -23,18 +49,22 @@
       第二个参数可省略，代表此label的文字，默认为字段名(Name)
       -->
       <%= f.label :name,"Name--f.label的第二个参数" %>
-      <%= f.text_field :name %>
+      <%= f.text_field :name,class: 'form-control' %>
 
       <%= f.label :email %>
-      <%= f.email_field :email %>
+      <%= f.email_field :email,class: 'form-control' %>
 
       <%= f.label :password %>
-      <%= f.password_field :password %>
+      <%= f.password_field :password,class: 'form-control' %>
 
       <%= f.label :password_confirmation, "Confirmation" %>
-      <%= f.password_field :password_confirmation %>
+      <%= f.password_field :password_confirmation,class: 'form-control' %>
 
       <%= f.submit "Create my account", class: "btn btn-primary" %>
     <% end %>
+
+
+
+
   </div>
 </div>

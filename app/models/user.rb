@@ -7,7 +7,7 @@ class User < ApplicationRecord
   before_save {email.downcase!} #上一行代码的一种优雅的写法
   validates :name,presence: true,length: {maximum: 50}
   validates :email,
-            presence: true,# 不可为空！
+            presence: true,# 创建时不可为空！
             length: {maximum: 255},
             format: {with: VALID_EMAIL_REGEX}, #格式，需匹配“VALID_EMAIL_REGEX”这个正则表达式
             uniqueness: {case_sensitive: false} #不可重复且大小写不敏感
@@ -18,9 +18,11 @@ class User < ApplicationRecord
             # 解决方案：在数据库上加索引，让数据库中的email唯一
             # rails generate migration add_index_to_users_email
             # rails db:migrate
-
   validates :password,
-            length: {minimum: 6}
+            presence: true, #创建时不可为空
+            allow_nil: true,#可以为空
+            length: { minimum: 6 }
+
 
   # 返回指定字符串的哈希摘要
   def User.digest(string)
@@ -45,6 +47,7 @@ class User < ApplicationRecord
   def forget
     update_attribute(:remember_digest, nil)
   end
+
   # 如果指定的令牌和摘要匹配,返回 true
   # 这里的remember_token是方法里的参数，是的局部变量，而不是类中的属性
   # 用于检测自身的remember_digest属性与参数中的remember_token是否匹配
@@ -52,4 +55,5 @@ class User < ApplicationRecord
     return false if remember_digest.nil?
     BCrypt::Password.new(remember_digest).is_password?(remember_token)
   end
+
 end

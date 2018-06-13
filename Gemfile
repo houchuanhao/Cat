@@ -36,8 +36,14 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'rails', '~> 5.0.0'
 # Use mysql as the database for Active Record
 gem 'mysql2', '>= 0.3.18', '< 0.5'
+
 gem 'bcrypt', '3.1.11'  #用于md5加密
 
+#用于产生用户
+gem 'faker', '1.6.3'
+
+#用于分页
+gem 'will_paginate', '3.1.0'
 gem 'bootstrap-sass', '3.3.6'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
@@ -87,3 +93,4 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+

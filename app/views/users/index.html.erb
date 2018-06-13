@@ -1,0 +1,23 @@
+<% provide(:title, 'All users') %>
+<h1>All users</h1>
+
+<!---
+will_paginate 方法有点小神奇,在 Users 控制器的视图中,它会自动寻找名为 @users 的对象,然后显示一
+个分页导航链接。
+will_paginate 要求调用 paginate 方法才能分页
+
+--->
+<%= will_paginate %>
+
+
+<ul class="users">
+  <% @users.each do |user| %>
+    <li>
+      <%= gravatar_for user, size: 50 %>
+      <%= link_to user.name, user %>
+    </li>
+  <% end %>
+</ul>
+
+
+<%= will_paginate %>

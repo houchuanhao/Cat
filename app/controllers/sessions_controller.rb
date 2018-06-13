@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
 
   def new
+    #debugger
   end
   def create
     @user = User.find_by(email: params[:session][:email].downcase)
@@ -9,10 +10,10 @@ class SessionsController < ApplicationController
       log_in @user
       #记住用户
       params[:session][:remember_me]=='1' ? remember(@user) : forget(@user)
-      redirect_to @user
+      #redirect_to @user
       # 相当于redirect_to user_url(user)
       # user_url(user)  "http://0.0.0.0:3000/users/5"
-
+      redirect_back_or @user
     else
       flash.now[:danger] = 'Invalid email/password combination'
       render 'new'
